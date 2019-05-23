@@ -144,6 +144,23 @@ wx.ready(function () {
                     .catch(function (error) {
                         console.log(error);
                     });
+            },
+            handleCheck() {
+                console.log('check click');
+                axios.post('/user/check', null, {
+                    params: {
+                        openid: 'oUwXe58JsPM6MBFsI3YvnbFIpg-8',
+                        type: this.selectedCheckType
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        alert('打卡成功');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert('打卡失败');
+                    });
             }
         }
     })
