@@ -1,7 +1,8 @@
 console.log('load wechat.js');
 
 // const access_token = '17_Wi7SeShqk1mfoZhLCjtH9Xpd56-0gFoqKTw86Ni4jWzfXNUoOBco5eTRo_BohtfogQR3sqJTSQXuIhRrEG-cqM8nvyIKVr3jS9BF6cSZG-QuftGgZ5-dXUpjG7DdqGr3HNAPT1ga9_aoo8NEGOQiAAAUCE';
-const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocXJ1-rhuZap-KCuKJkIf4Xau9hPn1Ac4qaSalLl4lYwrA';
+const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocVgGqpkkOvxHkNCo54beFYVgLWZPJljfaw7XllFMlkI0A';
+console.log('ticket:',ticket)
 
 const appId = 'wx0c14a6dfeab19166';
 const timestamp = Date.now();
@@ -86,7 +87,7 @@ wx.ready(function () {
             },
             canCheck(latitude, longitude) {
                 console.log('call can check');
-                axios.get('http://192.168.137.1:8080/user/canCheck', {
+                axios.get('/user/canCheck', {
                     params: {
                         latitude: latitude,
                         longitude: longitude
