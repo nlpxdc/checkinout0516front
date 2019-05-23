@@ -1,8 +1,8 @@
 console.log('load wechat.js');
 
 // const access_token = '17_Wi7SeShqk1mfoZhLCjtH9Xpd56-0gFoqKTw86Ni4jWzfXNUoOBco5eTRo_BohtfogQR3sqJTSQXuIhRrEG-cqM8nvyIKVr3jS9BF6cSZG-QuftGgZ5-dXUpjG7DdqGr3HNAPT1ga9_aoo8NEGOQiAAAUCE';
-const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocVgGqpkkOvxHkNCo54beFYVgLWZPJljfaw7XllFMlkI0A';
-console.log('ticket:',ticket)
+const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocUhaM-xNJEM7eev457Wyk3-B0JbrgSe6p0fpYEGxXiwPA';
+console.log('ticket:', ticket)
 
 const appId = 'wx0c14a6dfeab19166';
 const timestamp = Date.now();
@@ -49,11 +49,11 @@ wx.ready(function () {
             checkTypes: [
                 {
                     label: '上班打卡',
-                    value: 0
+                    value: '0'
                 },
                 {
                     label: '下班打卡',
-                    value: 1
+                    value: '1'
                 }
             ],
             checkEnabled: true
@@ -62,11 +62,27 @@ wx.ready(function () {
         computed: {
             currentTime() {
                 return Date.now();
+            },
+            checkBtnText() {
+                var text = '';
+                switch (this.selectedCheckType) {
+                    case '0':
+                        text = '签到';
+                        break;
+                    case '1':
+                        text = '签退';
+                        break;
+
+                    default:
+                        break;
+                }
+                return text;
             }
         },
         mounted() {
             console.log('view mounted');
             this.getLocation();
+            this.getCurrentStatus();
         },
         methods: {
             getLocation() {
@@ -76,7 +92,7 @@ wx.ready(function () {
                         console.log(res);
                         app.currentLatitude = res.latitude;
                         app.currentLongitude = res.longitude;
-                        console.log(res.latitude,res.longitude);
+                        console.log(res.latitude, res.longitude);
                         console.log(app.currentLatitude, app.currentLongitude);
                         app.canCheck(app.currentLatitude, app.currentLongitude);
                     },
@@ -96,6 +112,34 @@ wx.ready(function () {
                     .then(function (response) {
                         console.log(response);
                         app.checkEnabled = false;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getCurrentStatus() {
+                axios.get('/user/getCurrentStatus', {
+                    params: {
+                        openid: 'oUwXe58JsPM6MBFsI3YvnbFIpg-8'
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        var currentStatus = response.data;
+                        switch (currentStatus) {
+                            case 0:
+                                console.log('00000000000')
+                                app.selectedCheckType = '0';
+                                break;
+                            case 1:
+                                console.log('111111111111');
+                                app.selectedCheckType = '1';
+                                break;
+                            default:
+                                break;
+                        }
+                        console.log('current status', currentStatus);
+                        console.log('select check type', app.selectedCheckType);
                     })
                     .catch(function (error) {
                         console.log(error);

@@ -20,7 +20,9 @@
         <mt-cell title="当前经度" :value="currentLongitude"></mt-cell>
         <mt-radio title="打卡类型" v-model="selectedCheckType" :options="checkTypes">
         </mt-radio>
-        <mt-button type="primary" size="large" :disabled="checkEnabled">打卡</mt-button>
+        <mt-button type="primary" size="large" :disabled="checkEnabled">
+            {{checkBtnText}}
+        </mt-button>
     </div>
 
     <script src="assets/js/axios.min.js"></script>
