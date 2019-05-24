@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/mintui.css">
+    <title>home</title>
+    <script src="assets/js/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        home <br>
+        <mt-field label="code" placeholder="Input code" v-model="code"></mt-field>
+        <mt-button size="large" type="primary" @click="handleGetToken">getToken</mt-button>
+        <br>
+        <mt-button size="large" type="primary" @click="handleGotoCheckPage">打卡页</mt-button>
+    </div>
+
+    <script src="assets/js/js.cookie-2.2.0.min.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/mintui.js"></script>
+    <script src="viewmodels/home.js"></script>
+
+</body>
+
+</html>

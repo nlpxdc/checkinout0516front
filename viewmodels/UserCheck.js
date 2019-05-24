@@ -1,7 +1,7 @@
 console.log('load wechat.js');
 
 // const access_token = '17_Wi7SeShqk1mfoZhLCjtH9Xpd56-0gFoqKTw86Ni4jWzfXNUoOBco5eTRo_BohtfogQR3sqJTSQXuIhRrEG-cqM8nvyIKVr3jS9BF6cSZG-QuftGgZ5-dXUpjG7DdqGr3HNAPT1ga9_aoo8NEGOQiAAAUCE';
-const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocUhaM-xNJEM7eev457Wyk3-B0JbrgSe6p0fpYEGxXiwPA';
+const ticket = 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocUhV8dXGX0BlJkTm-_jZDNVfQFIyLhWyBSs_r_BeQD-XA';
 console.log('ticket:', ticket)
 
 const appId = 'wx0c14a6dfeab19166';
@@ -43,6 +43,7 @@ wx.ready(function () {
     app = new Vue({
         el: '#app',
         data: {
+            openid: '',
             currentLatitude: '',
             currentLongitude: '',
             selectedCheckType: '',
@@ -81,6 +82,7 @@ wx.ready(function () {
         },
         mounted() {
             console.log('view mounted');
+            this.openid = localStorage['openid'];
             this.getLocation();
             this.getCurrentStatus();
         },
@@ -149,7 +151,7 @@ wx.ready(function () {
                 console.log('check click');
                 axios.post('/user/check', null, {
                     params: {
-                        openid: 'oUwXe58JsPM6MBFsI3YvnbFIpg-8',
+                        openid: this.openid,
                         type: this.selectedCheckType
                     }
                 })
