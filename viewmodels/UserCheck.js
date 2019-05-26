@@ -1,7 +1,7 @@
 app = new Vue({
     el: '#app',
     data: {
-        ticket: '',
+        ticket: 'LIKLckvwlJT9cWIhEQTwfJuU557garB7J1tppEvMocWYceaaflsOr_IsIMyzBF5AcbOXObAKaeDhZLIm3GjpTg',
         appId: 'wx0c14a6dfeab19166',
 
 
@@ -31,16 +31,16 @@ app = new Vue({
         },
         originParams() {
             const originParams =
-                'jsapi_ticket=' + ticket
-                + '&noncestr=' + nonceStr
-                + '&timestamp=' + timestamp
+                'jsapi_ticket=' + this.ticket
+                + '&noncestr=' + this.nonceStr
+                + '&timestamp=' + this.currentTime
                 + '&url=' + location.href;
 
             return originParams;
         },
         signature() {
             const shaObj = new jsSHA("SHA-1", "TEXT");
-            shaObj.update(originParams);
+            shaObj.update(this.originParams);
             const signature = shaObj.getHash("HEX");
             return signature;
         },
@@ -81,10 +81,10 @@ app = new Vue({
 
         wx.ready(function () {
             console.log('wx ready');
+            app.getLocation();
         });
 
         this.openid = localStorage['openid'];
-        this.getLocation();
         this.getCurrentStatus();
     },
     methods: {

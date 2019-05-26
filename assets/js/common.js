@@ -1,2 +1,2 @@
-axios.defaults.baseURL = 'http://10.1.104.50:8080';
+axios.defaults.baseURL = 'http://192.168.100.104:8080';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
